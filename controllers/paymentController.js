@@ -3,8 +3,8 @@ const crypto = require('crypto');
 const Payment = require('../models/Payment');
 
 const razorpay = new Razorpay({
-  key_id: 'rzp_test_Oy62IkchWuGtwR', // Replace with your Razorpay Key ID
-  key_secret: 'UuOSFGrJGd3GdYwTxvLRC1YU', // Replace with your Razorpay Key Secret
+  key_id: 'rzp_live_7GXEZQosubI74a', // Replace with your Razorpay Key ID
+  key_secret: 'DyaXPuvbjnjgqh8HujZsoune', // Replace with your Razorpay Key Secret
 });
 
 exports.createOrder = async (req, res) => {
@@ -33,7 +33,7 @@ exports.createOrder = async (req, res) => {
     });
     await payment.save();
     res.json({
-      key: 'rzp_test_Oy62IkchWuGtwR',
+      key: 'rzp_live_7GXEZQosubI74a',
       amount: order.amount,
       currency: order.currency,
       id: order.id,
@@ -48,7 +48,7 @@ exports.createOrder = async (req, res) => {
 
 exports.verifyPayment = async (req, res) => {
   const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body;
-  const key_secret = 'UuOSFGrJGd3GdYwTxvLRC1YU';
+  const key_secret = 'DyaXPuvbjnjgqh8HujZsoune';
 
   const generated_signature = crypto
     .createHmac('sha256', key_secret)
